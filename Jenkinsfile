@@ -11,12 +11,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-                    def buildCmd = 'npm run build'
-                    node {
-                        sh script: buildCmd, label: 'npm run build'
-                    }
-                }
+                bat "npm run build"
             }
         }
     }
