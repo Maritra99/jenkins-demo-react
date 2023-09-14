@@ -4,14 +4,14 @@ pipeline {
         nodejs "nodejs"
     }
     stages {
-        stage('Install Dependencies') {
+        stage('Docker Image Creation') {
             steps {
-                bat "npm install"
+                bat "docker image build -t react-app-image ."
             }
         }
-        stage('Build') {
+        stage('Docker Image Containerization') {
             steps {
-                bat "npm run build"
+                bat "docker run -dp 8000:3000 --name react-app-container react-app-image:latest"
             }
         }
     }
