@@ -4,10 +4,9 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    def installCmd = 'npm install'
-                    node {
-                        sh script: installCmd, label: 'npm install'
-                    }
+                    def npmHome = tool name: 'nodejs', type: 'Tool'
+                    def npm = "${npmHome}/bin/npm"
+                    sh "${npm} install"
                 }
             }
         }
@@ -17,16 +16,6 @@ pipeline {
                     def buildCmd = 'npm run build'
                     node {
                         sh script: buildCmd, label: 'npm run build'
-                    }
-                }
-            }
-        }
-        stage('Deploy to Localhost') {
-            steps {
-                script {
-                    def deployCmd = 'npm start'  // Replace with your deployment command
-                    node {
-                        sh script: deployCmd, label: 'npm start'
                     }
                 }
             }
