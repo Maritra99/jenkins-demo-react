@@ -6,11 +6,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                script {
-                    def npmHome = tool name: 'nodejs', type: 'Tool'
-                    def npm = "${npmHome}/bin/npm"
-                    sh "${npm} install"
-                }
+                bat "npm install"
             }
         }
         stage('Build') {
